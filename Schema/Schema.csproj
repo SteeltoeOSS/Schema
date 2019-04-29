@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.11" />
+      <PackageReference Include="Steeltoe.CircuitBreaker.HystrixBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.Management.EndpointBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.Management.ExporterBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.Security.DataProtection.CredHubBase" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <!--<ProjectReference Include="..\..\Configuration\src\Steeltoe.Extensions.Configuration.ConfigServerBase\Steeltoe.Extensions.Configuration.ConfigServerBase.csproj" />-->
+      <!--<ProjectReference Include="..\..\Connectors\src\Steeltoe.CloudFoundry.ConnectorBase\Steeltoe.CloudFoundry.ConnectorBase.csproj" />-->
+      <!--<ProjectReference Include="..\..\Discovery\src\Steeltoe.Discovery.EurekaBase\Steeltoe.Discovery.EurekaBase.csproj" />-->
+      <!--<ProjectReference Include="..\..\Management\src\Steeltoe.Management.EndpointBase\Steeltoe.Management.EndpointBase.csproj" />-->
+    </ItemGroup>
+
+</Project>
