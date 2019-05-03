@@ -10,6 +10,7 @@ using Steeltoe.CloudFoundry.Connector.Redis;
 using Steeltoe.CloudFoundry.Connector.SqlServer;
 using Steeltoe.Discovery.Eureka;
 using Steeltoe.Extensions.Configuration.ConfigServer;
+using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Endpoint.CloudFoundry;
 using Steeltoe.Management.Endpoint.Env;
 using Steeltoe.Management.Endpoint.Health;
@@ -66,7 +67,7 @@ namespace Schema
         public HealthEndpointOptions Health { get; set; }
         public HeapDumpEndpointOptions HeapDump { get; set; }
         public HttpTraceEndpointOptions HttpTrace { get; set; }
-        public HypermediaEndpointOptions Actuator { get; set; }
+        public HypermediaEndpointOptionsSchema Actuator { get; set; }
         public InfoEndpointOptions Info { get; set; }
         public LoggersEndpointOptions Loggers { get; set; }
         public MappingsEndpointOptions Mappings { get; set; }
@@ -74,6 +75,11 @@ namespace Schema
         public RefreshEndpointOptions Refresh { get; set; }
         public ThreadDumpEndpointOptions Dump { get; set; }
         public TraceEndpointOptions Trace { get; set; }
+    }
+
+    public class HypermediaEndpointOptionsSchema : HypermediaEndpointOptions
+    {
+        public Exposure Exposure { get; set; }
     }
     public class LoggingRoot// : Dictionary<string,Logging>
     {

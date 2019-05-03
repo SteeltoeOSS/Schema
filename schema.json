@@ -378,7 +378,7 @@
           "$ref": "#/definitions/HttpTraceEndpointOptions"
         },
         "Actuator": {
-          "$ref": "#/definitions/HypermediaEndpointOptions"
+          "$ref": "#/definitions/HypermediaEndpointOptionsSchema"
         },
         "Info": {
           "$ref": "#/definitions/InfoEndpointOptions"
@@ -482,6 +482,38 @@
         },
         "Instance": {
           "$ref": "#/definitions/IEurekaInstanceConfig"
+        }
+      }
+    },
+    "Exposure": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "Include": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "Exclude": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         }
       }
     },
@@ -703,12 +735,15 @@
         }
       }
     },
-    "HypermediaEndpointOptions": {
+    "HypermediaEndpointOptionsSchema": {
       "type": [
         "object",
         "null"
       ],
       "properties": {
+        "Exposure": {
+          "$ref": "#/definitions/Exposure"
+        },
         "DefaultSensitive": {
           "type": "boolean"
         },
