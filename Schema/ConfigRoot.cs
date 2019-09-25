@@ -41,11 +41,16 @@ namespace Schema
         public ConnectorConfig<PostgresProviderConnectorOptions> Postgres { get; set; }
         public ConnectorConfig<RabbitMQProviderConnectorOptions> Rabbitmq { get; set; }
         public ConnectorConfig<RedisCacheConnectorOptions> Redis { get; set; }
-        public ConnectorConfig<SqlServerProviderConnectorOptions> SqlServer { get; set; }
+        public SqlServerConfig SqlServer { get; set; }
         public ConnectorConfig<MongoDbConnectorOptions> MongoDb { get; set; }
         public ConnectorConfig<HystrixProviderConnectorOptions> Hystrix { get; set; }
         public Security Security { get; set; }
         public Management Management { get; set; }
+    }
+
+    public class SqlServerConfig
+    {
+        public SqlServerProviderConnectorOptions Credentials { get; set; }
     }
 
     public class Security

@@ -307,17 +307,6 @@
         }
       }
     },
-    "ConnectorConfig<SqlServerProviderConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
-      "properties": {
-        "Client": {
-          "$ref": "#/definitions/SqlServerProviderConnectorOptions"
-        }
-      }
-    },
     "EndpointClaim": {
       "type": [
         "object",
@@ -1978,6 +1967,17 @@
         }
       }
     },
+    "SqlServerConfig": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "Credentials": {
+          "$ref": "#/definitions/SqlServerProviderConnectorOptions"
+        }
+      }
+    },
     "SqlServerProviderConnectorOptions": {
       "type": [
         "object",
@@ -2228,7 +2228,7 @@
       "$ref": "#/definitions/ConnectorConfig<RedisCacheConnectorOptions>"
     },
     "SqlServer": {
-      "$ref": "#/definitions/ConnectorConfig<SqlServerProviderConnectorOptions>"
+      "$ref": "#/definitions/SqlServerConfig"
     },
     "MongoDb": {
       "$ref": "#/definitions/ConnectorConfig<MongoDbConnectorOptions>"
