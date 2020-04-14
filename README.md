@@ -8,7 +8,7 @@ Generates the schema file that provides validation and IntelliSense when used in
 
 ```json
 {
-    "$schema": "https://raw.githubusercontent.com/steeltoeoss-incubator/steeltoe-schema/master/schema.json"
+    "$schema": "https://steeltoe.io/schema/1/schema.json"
     ...
 }
 ```
