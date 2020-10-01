@@ -2,20 +2,23 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.11" />
-      <PackageReference Include="Steeltoe.CircuitBreaker.HystrixBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.CloudFoundry.ConnectorBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.Discovery.EurekaBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.Management.EndpointBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.Management.ExporterBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryBase" Version="2.2.0" />
-      <PackageReference Include="Steeltoe.Security.DataProtection.CredHubBase" Version="2.2.0" />
+      <PackageReference Include="Steeltoe.CircuitBreaker.HystrixBase" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Connector.ConnectorBase" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Discovery.Consul" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Discovery.Eureka" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Discovery.Kubernetes" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerBase" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Extensions.Configuration.KubernetesBase" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Management.EndpointBase" Version="3.0.0" />
+      <!--<PackageReference Include="Steeltoe.Management.ExporterBase" Version="3.0.0" />-->
+      <PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryBase" Version="3.0.0" />
+      <PackageReference Include="Steeltoe.Security.DataProtection.CredHubBase" Version="3.0.0" />
     </ItemGroup>
 
     <ItemGroup>

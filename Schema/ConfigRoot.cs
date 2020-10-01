@@ -1,134 +1,57 @@
-using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
-using Steeltoe.CloudFoundry.Connector.Hystrix;
-using Steeltoe.CloudFoundry.Connector.MongoDb;
-using Steeltoe.CloudFoundry.Connector.MySql;
-using Steeltoe.CloudFoundry.Connector.OAuth;
-using Steeltoe.CloudFoundry.Connector.PostgreSql;
-using Steeltoe.CloudFoundry.Connector.RabbitMQ;
-using Steeltoe.CloudFoundry.Connector.Redis;
-using Steeltoe.CloudFoundry.Connector.SqlServer;
-using Steeltoe.Discovery.Eureka;
-using Steeltoe.Extensions.Configuration.ConfigServer;
-using Steeltoe.Management.Endpoint;
-using Steeltoe.Management.Endpoint.CloudFoundry;
-using Steeltoe.Management.Endpoint.Env;
-using Steeltoe.Management.Endpoint.Health;
-using Steeltoe.Management.Endpoint.HeapDump;
-using Steeltoe.Management.Endpoint.Hypermedia;
-using Steeltoe.Management.Endpoint.Info;
-using Steeltoe.Management.Endpoint.Loggers;
-using Steeltoe.Management.Endpoint.Mappings;
-using Steeltoe.Management.Endpoint.Metrics;
-using Steeltoe.Management.Endpoint.Refresh;
-using Steeltoe.Management.Endpoint.ThreadDump;
-using Steeltoe.Management.Endpoint.Trace;
+using Steeltoe.Connector.CosmosDb;
+using Steeltoe.Connector.Hystrix;
+using Steeltoe.Connector.MongoDb;
+using Steeltoe.Connector.MySql;
+using Steeltoe.Connector.PostgreSql;
+using Steeltoe.Connector.RabbitMQ;
+using Steeltoe.Connector.Redis;
+using Steeltoe.Discovery.Consul.Discovery;
+using System.ComponentModel;
 
 namespace Schema
 {
     public class ConfigRoot
     {
-        /// <summary>
-        /// Spring configuration
-        /// </summary>
+        [Description("General settings for Steeltoe and Spring Cloud-compatible features")]
         public Spring Spring { get; set; }
-        /// <summary>
-        /// Eureka configuration
-        /// </summary>
+
+        [Description("Settings for service discovery and registration with Spring Cloud Eureka")]
         public EurekaConfig Eureka { get; set; }
+
+        [Description("Settings for service discovery and registration with Hashicorp Consul")]
+        public ConsulConfig Consul { get; set; }
+
+        [Description("Settings for Microsoft's ILogging Infrastructure")]
         public LoggingRoot Logging { get; set; }
+
+        [Description("Settings for Steeltoe CosmosDb Connector")]
+        public ConnectorConfig<CosmosDbConnectorOptions> CosmosDb { get; set; }
+
+        [Description("Settings for Steeltoe MySQL Connector")]
         public ConnectorConfig<MySqlProviderConnectorOptions> MySql { get; set; }
+
+        [Description("Settings for Steeltoe PostgreSQL Connector")]
         public ConnectorConfig<PostgresProviderConnectorOptions> Postgres { get; set; }
+
+        [Description("Settings for Steeltoe RabbitMQ Connector")]
         public ConnectorConfig<RabbitMQProviderConnectorOptions> Rabbitmq { get; set; }
+
+        [Description("Settings for Steeltoe Redis Connector")]
         public ConnectorConfig<RedisCacheConnectorOptions> Redis { get; set; }
+
+        [Description("Settings for Steeltoe Microsoft SQL Server Connector")]
         public SqlServerConfig SqlServer { get; set; }
+
+        [Description("Settings for Steeltoe MongoDb Connector")]
         public ConnectorConfig<MongoDbConnectorOptions> MongoDb { get; set; }
+
+        [Description("Settings for Hystrix Circuit Breakers")]
         public ConnectorConfig<HystrixProviderConnectorOptions> Hystrix { get; set; }
+
+        [Description("Settings for Steeltoe Authentication Providers")]
         public Security Security { get; set; }
+
+        [Description("Settings for Steeltoe Management Endpoints")]
         public Management Management { get; set; }
-    }
-
-    public class SqlServerConfig
-    {
-        public SqlServerProviderConnectorOptions Credentials { get; set; }
-    }
-
-    public class Security
-    {
-        public ConnectorConfig<OAuthConnectorOptions> Oauth2 { get; set; }
-    }
-    public class Management
-    {
-        public Endpoints Endpoints { get; set; }
-    }
-
-    public class Endpoints
-    {
-        public string Path { get; set; }
-        public string Enabled { get; set; }
-        public string Sensitive { get; set; }
-        public CloudFoundryEndpointOptions CloudFoundry { get; set; }
-        public EnvEndpointOptions Env { get; set; }
-        public HealthEndpointOptions Health { get; set; }
-        public HeapDumpEndpointOptions HeapDump { get; set; }
-        public HttpTraceEndpointOptions HttpTrace { get; set; }
-        public HypermediaEndpointOptionsSchema Actuator { get; set; }
-        public InfoEndpointOptions Info { get; set; }
-        public LoggersEndpointOptions Loggers { get; set; }
-        public MappingsEndpointOptions Mappings { get; set; }
-        public MetricsEndpointOptions Metrics { get; set; }
-        public RefreshEndpointOptions Refresh { get; set; }
-        public ThreadDumpEndpointOptions Dump { get; set; }
-        public TraceEndpointOptions Trace { get; set; }
-    }
-
-    public class HypermediaEndpointOptionsSchema : HypermediaEndpointOptions
-    {
-        public Exposure Exposure { get; set; }
-    }
-    public class LoggingRoot// : Dictionary<string,Logging>
-    {
-        public bool IncludeScopes { get; set; }
-        public Dictionary<string,LogLevel> LogLevel { get; set; }
-    }
-    public class Logging
-    {
-        public bool IncludeScopes { get; set; }
-        public Dictionary<string,LogLevel> LogLevel { get; set; }
-    }
-    public class Cloud
-    {
-        public ConfigServerClientSettings Config { get; set; }
-    }
-
-    public class ConnectorConfig<T>
-    {
-        public T Client { get; set; }
-    }
-
-    public class EurekaConfig
-    {
-        /// <summary>
-        /// Eureka client configuration
-        /// </summary>
-        public IEurekaClientConfig Client { get; set; }
-        /// <summary>
-        /// Configuration for how application instance is registered in eureka
-        /// </summary>
-        public IEurekaInstanceConfig Instance { get; set; }
-    }
-
-    public class Spring
-    {
-        public Application Application { get; set; }
-        public Cloud Cloud { get; set; }
-    }
-
-    public class Application
-    {
-        /// <summary>
-        /// Application name
-        /// </summary>
-        public string Name { get; set; }
     }
 }
