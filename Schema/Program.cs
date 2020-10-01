@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema.Generation;
+using Steeltoe.Common;
+using Steeltoe.Common.Kubernetes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
-using Newtonsoft.Json.Serialization;
-using Steeltoe.Discovery.Eureka;
 
 namespace Schema
 {
@@ -18,19 +15,12 @@ namespace Schema
     {
         static void Main(string[] args)
         {
+            var propertyIgnoringResolver = new PropertyIgnoreContractResolver();
+            propertyIgnoringResolver.IgnoreProperty(typeof(ApplicationInstanceInfo), "ApplicationRoot", "SpringApplicationRoot", "ServicesRoot", "EurekaRoot", "ConfigServerRoot", "ConsulRoot", "KubernetesRoot", "ManagementRoot", "Application_Id", "EurekaInstanceNameKey", "PlatformNameKey", "ManagementNameKey", "KubernetesNameKey", "ConsulInstanceNameKey", "ConfigServerNameKey", "AppNameKey", "AppInstanceIdKey", "Instance_Id", "DefaultAppName");
+            propertyIgnoringResolver.IgnoreProperty(typeof(KubernetesApplicationOptions), KubernetesConfig.IgnoredProperties);
 
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
-            {
-                Converters = new List<JsonConverter>()
-                {
-                    new StringEnumConverter()
-                }
-            };
-            var gen = new JSchemaGenerator()
-            {
-                DefaultRequired = Required.Default,
-//                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            };
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings() { Converters = new List<JsonConverter>() { new StringEnumConverter() } };
+            var gen = new JSchemaGenerator() { DefaultRequired = Required.DisallowNull, ContractResolver = propertyIgnoringResolver };
             var myType = typeof(ConfigRoot);
             var schema = gen.Generate(myType);
             

@@ -1,83 +1,76 @@
 {
   "definitions": {
     "Application": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Name": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "description": "Application name. Can generally be overridden under specific components.",
+          "type": "string"
+        }
+      }
+    },
+    "AsnEncodedData": {
+      "type": "object",
+      "properties": {
+        "Oid": {
+          "$ref": "#/definitions/Oid"
+        },
+        "RawData": {
+          "type": "string"
+        }
+      }
+    },
+    "AsymmetricAlgorithm": {
+      "type": "object",
+      "properties": {
+        "KeySize": {
+          "type": "integer"
+        },
+        "LegalKeySizes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeySizes"
+          }
+        },
+        "SignatureAlgorithm": {
+          "type": "string"
+        },
+        "KeyExchangeAlgorithm": {
+          "type": "string"
         }
       }
     },
     "Cloud": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Config": {
           "$ref": "#/definitions/ConfigServerClientSettings"
+        },
+        "Kubernetes": {
+          "$ref": "#/definitions/KubernetesConfig"
         }
       }
     },
     "CloudFoundryEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "ValidateCertificates": {
           "type": "boolean"
         },
         "ApplicationId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "CloudFoundryApi": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "DefaultSensitive": {
-          "type": "boolean"
-        },
-        "IsEnabled": {
-          "type": "boolean"
+          "type": "string"
         },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
         },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -93,53 +86,42 @@
         },
         "DefaultEnabled": {
           "type": "boolean"
+        },
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
+          "type": "boolean"
         }
       }
     },
     "ConfigServerClientSettings": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for interacting with Spring Cloud Config Server",
+      "type": "object",
       "properties": {
         "Uri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Enabled": {
           "type": "boolean"
         },
         "Environment": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Name": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Label": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Username": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "FailFast": {
           "type": "boolean"
@@ -166,10 +148,7 @@
           "type": "boolean"
         },
         "DiscoveryServiceId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "HealthEnabled": {
           "type": "boolean"
@@ -178,63 +157,55 @@
           "type": "integer"
         },
         "RawUri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RawUris": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": "array",
           "items": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "Token": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Timeout": {
           "type": "integer"
         },
         "AccessTokenUri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ClientId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ClientSecret": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
+        },
+        "ClientCertificate": {
+          "$ref": "#/definitions/X509Certificate2"
         },
         "TokenTtl": {
           "type": "integer"
         },
         "TokenRenewRate": {
           "type": "integer"
+        },
+        "DisableTokenRenewal": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ConnectorConfig<CosmosDbConnectorOptions>": {
+      "description": "Settings for Steeltoe CosmosDb Connector",
+      "type": "object",
+      "properties": {
+        "Client": {
+          "$ref": "#/definitions/CosmosDbConnectorOptions"
         }
       }
     },
     "ConnectorConfig<HystrixProviderConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Hystrix Circuit Breakers",
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/HystrixProviderConnectorOptions"
@@ -242,10 +213,8 @@
       }
     },
     "ConnectorConfig<MongoDbConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe MongoDb Connector",
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/MongoDbConnectorOptions"
@@ -253,10 +222,8 @@
       }
     },
     "ConnectorConfig<MySqlProviderConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe MySQL Connector",
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/MySqlProviderConnectorOptions"
@@ -264,10 +231,7 @@
       }
     },
     "ConnectorConfig<OAuthConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/OAuthConnectorOptions"
@@ -275,10 +239,8 @@
       }
     },
     "ConnectorConfig<PostgresProviderConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe PostgreSQL Connector",
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/PostgresProviderConnectorOptions"
@@ -286,10 +248,8 @@
       }
     },
     "ConnectorConfig<RabbitMQProviderConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe RabbitMQ Connector",
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/RabbitMQProviderConnectorOptions"
@@ -297,59 +257,239 @@
       }
     },
     "ConnectorConfig<RedisCacheConnectorOptions>": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe Redis Connector",
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/RedisCacheConnectorOptions"
         }
       }
     },
+    "ConsulConfig": {
+      "description": "Settings for service discovery and registration with Hashicorp Consul",
+      "type": "object",
+      "properties": {
+        "Discovery": {
+          "$ref": "#/definitions/ConsulDiscoveryOptions"
+        },
+        "Host": {
+          "type": "string"
+        },
+        "Scheme": {
+          "type": "string"
+        },
+        "Port": {
+          "type": "integer"
+        },
+        "Datacenter": {
+          "type": "string"
+        },
+        "Token": {
+          "type": "string"
+        },
+        "WaitTime": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
+    "ConsulDiscoveryOptions": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "UseNetUtils": {
+          "type": "boolean"
+        },
+        "NetUtils": {
+          "$ref": "#/definitions/InetUtils"
+        },
+        "Heartbeat": {
+          "$ref": "#/definitions/ConsulHeartbeatOptions"
+        },
+        "Retry": {
+          "$ref": "#/definitions/ConsulRetryOptions"
+        },
+        "DefaultQueryTag": {
+          "type": "string"
+        },
+        "QueryPassing": {
+          "type": "boolean"
+        },
+        "Scheme": {
+          "type": "string"
+        },
+        "RegisterHealthCheck": {
+          "type": "boolean"
+        },
+        "HealthCheckUrl": {
+          "type": "string"
+        },
+        "HealthCheckPath": {
+          "type": "string"
+        },
+        "HealthCheckInterval": {
+          "type": "string"
+        },
+        "HealthCheckTimeout": {
+          "type": "string"
+        },
+        "HealthCheckCriticalTimeout": {
+          "type": "string"
+        },
+        "HealthCheckTlsSkipVerify": {
+          "type": "boolean"
+        },
+        "HostName": {
+          "type": "string"
+        },
+        "IpAddress": {
+          "type": "string"
+        },
+        "Port": {
+          "type": "integer"
+        },
+        "PreferIpAddress": {
+          "type": "boolean"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "PreferAgentAddress": {
+          "type": "boolean"
+        },
+        "InstanceZone": {
+          "type": "string"
+        },
+        "InstanceGroup": {
+          "type": "string"
+        },
+        "DefaultZoneMetadataName": {
+          "type": "string"
+        },
+        "FailFast": {
+          "type": "boolean"
+        },
+        "Register": {
+          "type": "boolean"
+        },
+        "Deregister": {
+          "type": "boolean"
+        },
+        "IsHeartBeatEnabled": {
+          "type": "boolean"
+        },
+        "IsRetryEnabled": {
+          "type": "boolean"
+        },
+        "CacheTTL": {
+          "type": "integer"
+        }
+      }
+    },
+    "ConsulHeartbeatOptions": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "TtlValue": {
+          "type": "integer"
+        },
+        "TtlUnit": {
+          "type": "string"
+        },
+        "IntervalRatio": {
+          "type": "number"
+        },
+        "Ttl": {
+          "type": "string"
+        }
+      }
+    },
+    "ConsulRetryOptions": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "InitialInterval": {
+          "type": "integer"
+        },
+        "MaxInterval": {
+          "type": "integer"
+        },
+        "Multiplier": {
+          "type": "number"
+        },
+        "MaxAttempts": {
+          "type": "integer"
+        }
+      }
+    },
+    "CosmosDbConnectorOptions": {
+      "type": "object",
+      "properties": {
+        "ConnectionString": {
+          "type": "string"
+        },
+        "Host": {
+          "type": "string"
+        },
+        "MasterKey": {
+          "type": "string"
+        },
+        "ReadOnlyKey": {
+          "type": "string"
+        },
+        "DatabaseId": {
+          "type": "string"
+        },
+        "DatabaseLink": {
+          "type": "string"
+        },
+        "UseReadOnlyCredentials": {
+          "type": "boolean"
+        }
+      }
+    },
     "EndpointClaim": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Type": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Value": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         }
       }
     },
     "Endpoints": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Enabled": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Sensitive": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "CloudFoundry": {
           "$ref": "#/definitions/CloudFoundryEndpointOptions"
@@ -393,52 +533,22 @@
       }
     },
     "EnvEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "KeysToSanitize": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": "array",
           "items": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -455,16 +565,20 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
     "EurekaConfig": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for service discovery and registration with Spring Cloud Eureka",
+      "type": "object",
       "properties": {
         "Client": {
           "$ref": "#/definitions/IEurekaClientConfig"
@@ -475,42 +589,24 @@
       }
     },
     "Exposure": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Include": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": "array",
           "items": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "Exclude": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": "array",
           "items": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         }
       }
     },
     "HealthEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "ShowDetails": {
           "type": "string",
@@ -524,40 +620,22 @@
           "$ref": "#/definitions/EndpointClaim"
         },
         "Role": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
-        "IsEnabled": {
-          "type": "boolean"
+        "Groups": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/HealthGroupOptions"
+          }
         },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
         },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -574,46 +652,36 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
-    "HeapDumpEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+    "HealthGroupOptions": {
+      "type": "object",
       "properties": {
-        "IsEnabled": {
-          "type": "boolean"
-        },
+        "Include": {
+          "type": "string"
+        }
+      }
+    },
+    "HeapDumpEndpointOptions": {
+      "type": "object",
+      "properties": {
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -630,16 +698,19 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
     "HttpTraceEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Capacity": {
           "type": "integer"
@@ -674,35 +745,14 @@
         "AddTimeTaken": {
           "type": "boolean"
         },
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -719,52 +769,31 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
     "HypermediaEndpointOptionsSchema": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Exposure": {
           "$ref": "#/definitions/Exposure"
         },
-        "DefaultSensitive": {
-          "type": "boolean"
-        },
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -780,29 +809,29 @@
         },
         "DefaultEnabled": {
           "type": "boolean"
+        },
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
+          "type": "boolean"
         }
       }
     },
     "HystrixProviderConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "SslEnabled": {
           "type": "boolean"
         },
         "Uri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Server": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Port": {
           "type": "integer"
@@ -811,33 +840,18 @@
           "type": "integer"
         },
         "Username": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "VirtualHost": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "UrlEncodedCredentials": {
-          "type": "boolean"
+          "type": "string"
         }
       }
     },
     "IDataCenterInfo": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Name": {
           "type": "string",
@@ -850,40 +864,16 @@
       }
     },
     "IEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -894,43 +884,35 @@
             "FULL"
           ]
         },
-        "Global": {
-          "$ref": "#/definitions/IManagementOptions"
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
+          "type": "boolean"
         }
       }
     },
     "IEurekaClientConfig": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for connection to the Eureka server",
+      "type": "object",
       "properties": {
         "RegistryFetchIntervalSeconds": {
           "type": "integer"
         },
-        "InstanceInfoReplicationIntervalSeconds": {
-          "type": "integer"
-        },
         "ProxyHost": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ProxyPort": {
           "type": "integer"
         },
         "ProxyUserName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ProxyPassword": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ShouldGZipContent": {
           "type": "boolean"
@@ -939,9 +921,6 @@
           "type": "integer"
         },
         "ShouldRegisterWithEureka": {
-          "type": "boolean"
-        },
-        "AllowRedirects": {
           "type": "boolean"
         },
         "ShouldDisableDelta": {
@@ -954,19 +933,13 @@
           "type": "boolean"
         },
         "RegistryRefreshSingleVipAddress": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ShouldOnDemandUpdateStatusChange": {
           "type": "boolean"
         },
         "EurekaServerServiceUrls": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ValidateCertificates": {
           "type": "boolean"
@@ -974,28 +947,17 @@
       }
     },
     "IEurekaInstanceConfig": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for how this application instance should register itself with Eureka",
+      "type": "object",
       "properties": {
         "InstanceId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "AppName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "AppGroupName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "IsInstanceEnabledOnInit": {
           "type": "boolean"
@@ -1019,103 +981,55 @@
           "type": "integer"
         },
         "VirtualHostName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "SecureVirtualHostName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ASGName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "MetadataMap": {
-          "type": [
-            "object",
-            "null"
-          ],
+          "type": "object",
           "additionalProperties": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "DataCenterInfo": {
           "$ref": "#/definitions/IDataCenterInfo"
         },
         "IpAddress": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "StatusPageUrlPath": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "StatusPageUrl": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "HomePageUrlPath": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "HomePageUrl": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "HealthCheckUrlPath": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "HealthCheckUrl": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "SecureHealthCheckUrl": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "DefaultAddressResolutionOrder": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": "array",
           "items": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "HostName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "PreferIpAddress": {
           "type": "boolean"
@@ -1123,75 +1037,36 @@
       }
     },
     "IManagementOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "EndpointOptions": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": "array",
           "items": {
             "$ref": "#/definitions/IEndpointOptions"
           }
         }
       }
     },
+    "InetUtils": {
+      "type": "object"
+    },
     "InfoEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -1208,46 +1083,177 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
-    "LoggersEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+    "KeySizes": {
+      "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "IsEnabled": {
-          "type": "boolean"
+        "MinSize": {
+          "type": "integer"
+        },
+        "MaxSize": {
+          "type": "integer"
+        },
+        "SkipSize": {
+          "type": "integer"
+        }
+      }
+    },
+    "KubernetesConfig": {
+      "description": "Settings for interacing with Kubernetes for Configuration and Service Discovery",
+      "type": "object",
+      "properties": {
+        "Discovery": {
+          "$ref": "#/definitions/KubernetesDiscoveryOptions"
         },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
         },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+        "Name": {
+          "type": "string"
+        },
+        "ApplicationName": {
+          "type": "string"
+        },
+        "NameSpace": {
+          "type": "string"
+        },
+        "Reload": {
+          "$ref": "#/definitions/ReloadSettings"
+        },
+        "Config": {
+          "$ref": "#/definitions/KubernetesConfiguration"
+        },
+        "Secrets": {
+          "$ref": "#/definitions/WatchableResource"
+        },
+        "NameEnvironmentSeparator": {
+          "type": "string"
+        },
+        "InstanceId": {
+          "type": "string"
+        },
+        "ApplicationId": {
+          "type": "string"
+        },
+        "ApplicationVersion": {
+          "type": "string"
+        },
+        "EnvironmentName": {
+          "type": "string"
+        },
+        "InstanceIndex": {
+          "type": "integer"
+        },
+        "Port": {
+          "type": "integer"
+        },
+        "Uris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Version": {
+          "type": "string"
+        },
+        "DiskLimit": {
+          "type": "integer"
+        },
+        "MemoryLimit": {
+          "type": "integer"
+        },
+        "FileDescriptorLimit": {
+          "type": "integer"
+        },
+        "InstanceIP": {
+          "type": "string"
+        },
+        "InternalIP": {
+          "type": "string"
+        }
+      }
+    },
+    "KubernetesConfiguration": {
+      "type": "object",
+      "properties": {
+        "Paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespacedResource"
+          }
+        }
+      }
+    },
+    "KubernetesDiscoveryOptions": {
+      "description": "Settings for using the Kubernetes API for service discovery",
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "ServiceName": {
+          "type": "string"
+        },
+        "AllNamespaces": {
+          "type": "boolean"
+        },
+        "Namespace": {
+          "type": "string"
+        },
+        "KnownSecurePorts": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "ServiceLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "PrimaryPortName": {
+          "type": "string"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/Metadata"
+        },
+        "CacheTTL": {
+          "type": "integer"
+        }
+      }
+    },
+    "LoggersEndpointOptions": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -1264,25 +1270,26 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
     "LoggingRoot": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Microsoft's ILogging Infrastructure",
+      "type": "object",
       "properties": {
         "IncludeScopes": {
           "type": "boolean"
         },
         "LogLevel": {
-          "type": [
-            "object",
-            "null"
-          ],
+          "type": "object",
           "additionalProperties": {
             "type": "string",
             "enum": [
@@ -1299,10 +1306,8 @@
       }
     },
     "Management": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe Management Endpoints",
+      "type": "object",
       "properties": {
         "Endpoints": {
           "$ref": "#/definitions/Endpoints"
@@ -1310,40 +1315,16 @@
       }
     },
     "MappingsEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -1360,58 +1341,57 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
+    "Metadata": {
+      "type": "object",
+      "properties": {
+        "AddLabels": {
+          "type": "boolean"
+        },
+        "LabelsPrefix": {
+          "type": "string"
+        },
+        "AddAnnotations": {
+          "type": "boolean"
+        },
+        "AnnotationsPrefix": {
+          "type": "string"
+        },
+        "AddPorts": {
+          "type": "boolean"
+        },
+        "PortsPrefix": {
+          "type": "string"
+        }
+      }
+    },
     "MetricsEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "IngressIgnorePattern": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "EgressIgnorePattern": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "IsEnabled": {
-          "type": "boolean"
+          "type": "string"
         },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
         },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -1428,339 +1408,257 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
     "MongoDbConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "ConnectionString": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Server": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Port": {
           "type": "integer"
         },
         "Username": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Database": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
-        "UrlEncodedCredentials": {
-          "type": "boolean"
+        "Options": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "MySqlProviderConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "ConnectionString": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Server": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Port": {
           "type": "integer"
         },
         "Username": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Database": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "SslMode": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "AllowPublicKeyRetrieval": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "AllowUserVariables": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "ConnectionTimeout": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": "integer"
         },
         "ConvertZeroDateTime": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "DefaultCommandTimeout": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": "integer"
         },
         "Keepalive": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": "integer"
         },
         "OldGuids": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "PersistSecurityInfo": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "TreatTinyAsBoolean": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "UseAffectedRows": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "UseCompression": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "ConnectionLifeTime": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": "integer"
         },
         "ConnectionReset": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": "boolean"
         },
         "MaximumPoolsize": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": "integer"
         },
         "MinimumPoolsize": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "type": "integer"
         },
         "Pooling": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "UrlEncodedCredentials": {
           "type": "boolean"
+        }
+      }
+    },
+    "NamespacedResource": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Namespace": {
+          "type": "string"
         }
       }
     },
     "OAuthConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "OAuthServiceUrl": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ClientId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ClientSecret": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "UserAuthorizationUri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "AccessTokenUri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "UserInfoUri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "TokenInfoUri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "JwtKeyUri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Scope": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": "array",
           "items": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": "string"
           }
         },
         "ValidateCertificates": {
           "type": "boolean"
+        }
+      }
+    },
+    "Oid": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string"
         },
-        "UrlEncodedCredentials": {
-          "type": "boolean"
+        "FriendlyName": {
+          "type": "string"
         }
       }
     },
     "PostgresProviderConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "ConnectionString": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Host": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Port": {
           "type": "integer"
         },
         "Username": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Database": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
-        "UrlEncodedCredentials": {
+        "SearchPath": {
+          "type": "string"
+        },
+        "SslMode": {
+          "type": "string"
+        },
+        "ClientCertificate": {
+          "type": "string"
+        },
+        "ClientKey": {
+          "type": "string"
+        },
+        "SslRootCertificate": {
+          "type": "string"
+        },
+        "Timeout": {
+          "type": "integer"
+        },
+        "CommandTimeout": {
+          "type": "integer"
+        },
+        "TrustServerCertificate": {
           "type": "boolean"
         }
       }
     },
+    "PublicKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EncodedKeyValue": {
+          "$ref": "#/definitions/AsnEncodedData"
+        },
+        "EncodedParameters": {
+          "$ref": "#/definitions/AsnEncodedData"
+        },
+        "Key": {
+          "$ref": "#/definitions/AsymmetricAlgorithm"
+        },
+        "Oid": {
+          "$ref": "#/definitions/Oid"
+        }
+      }
+    },
     "RabbitMQProviderConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "SslEnabled": {
           "type": "boolean"
         },
         "Uri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Server": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Port": {
           "type": "integer"
@@ -1769,63 +1667,36 @@
           "type": "integer"
         },
         "Username": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "VirtualHost": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "UrlEncodedCredentials": {
-          "type": "boolean"
+          "type": "string"
         }
       }
     },
     "RedisCacheConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Host": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Port": {
           "type": "integer"
         },
         "EndPoints": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "AllowAdmin": {
           "type": "boolean"
         },
         "ClientName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "ConnectRetry": {
           "type": "integer"
@@ -1843,25 +1714,16 @@
           "type": "boolean"
         },
         "ServiceName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Ssl": {
           "type": "boolean"
         },
         "SslHost": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "TieBreaker": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "WriteBuffer": {
           "type": "integer"
@@ -1870,57 +1732,24 @@
           "type": "integer"
         },
         "ConnectionString": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "InstanceName": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "UrlEncodedCredentials": {
-          "type": "boolean"
+          "type": "string"
         }
       }
     },
     "RefreshEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -1937,16 +1766,41 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ReloadSettings": {
+      "type": "object",
+      "properties": {
+        "Mode": {
+          "type": "string",
+          "enum": [
+            "Event",
+            "Polling"
+          ]
+        },
+        "Period": {
+          "type": "integer"
+        },
+        "ConfigMaps": {
+          "type": "boolean"
+        },
+        "Secrets": {
           "type": "boolean"
         }
       }
     },
     "Security": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe Authentication Providers",
+      "type": "object",
       "properties": {
         "Oauth2": {
           "$ref": "#/definitions/ConnectorConfig<OAuthConnectorOptions>"
@@ -1954,10 +1808,8 @@
       }
     },
     "Spring": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "General settings for Steeltoe and Spring Cloud-compatible features",
+      "type": "object",
       "properties": {
         "Application": {
           "$ref": "#/definitions/Application"
@@ -1968,10 +1820,8 @@
       }
     },
     "SqlServerConfig": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "description": "Settings for Steeltoe Microsoft SQL Server Connector",
+      "type": "object",
       "properties": {
         "Credentials": {
           "$ref": "#/definitions/SqlServerProviderConnectorOptions"
@@ -1979,120 +1829,60 @@
       }
     },
     "SqlServerProviderConnectorOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "ConnectionString": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Server": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
+        },
+        "InstanceName": {
+          "type": "string"
         },
         "Port": {
           "type": "integer"
         },
         "Username": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Password": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Database": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "IntegratedSecurity": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Uid": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Uri": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Db": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Pw": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Timeout": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "UrlEncodedCredentials": {
-          "type": "boolean"
+          "type": "integer"
         }
       }
     },
     "ThreadDumpEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -2109,16 +1899,19 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
         }
       }
     },
     "TraceEndpointOptions": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": "object",
       "properties": {
         "Capacity": {
           "type": "integer"
@@ -2153,35 +1946,14 @@
         "AddTimeTaken": {
           "type": "boolean"
         },
-        "IsEnabled": {
-          "type": "boolean"
-        },
         "Enabled": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "IsSensitive": {
           "type": "boolean"
-        },
-        "Sensitive": {
-          "type": [
-            "boolean",
-            "null"
-          ]
         },
         "Id": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "Path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": "string"
         },
         "RequiredPermissions": {
           "type": "string",
@@ -2198,8 +1970,104 @@
         "DefaultEnabled": {
           "type": "boolean"
         },
-        "DefaultSensitive": {
+        "AllowedVerbs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExactMatch": {
           "type": "boolean"
+        }
+      }
+    },
+    "WatchableResource": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespacedResource"
+          }
+        }
+      }
+    },
+    "X500DistinguishedName": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Oid": {
+          "$ref": "#/definitions/Oid"
+        },
+        "RawData": {
+          "type": "string"
+        }
+      }
+    },
+    "X509Certificate2": {
+      "type": "object",
+      "properties": {
+        "Archived": {
+          "type": "boolean"
+        },
+        "Extensions": {
+          "type": "array"
+        },
+        "FriendlyName": {
+          "type": "string"
+        },
+        "HasPrivateKey": {
+          "type": "boolean"
+        },
+        "PrivateKey": {
+          "$ref": "#/definitions/AsymmetricAlgorithm"
+        },
+        "IssuerName": {
+          "$ref": "#/definitions/X500DistinguishedName"
+        },
+        "NotAfter": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "NotBefore": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "PublicKey": {
+          "$ref": "#/definitions/PublicKey"
+        },
+        "RawData": {
+          "type": "string"
+        },
+        "SerialNumber": {
+          "type": "string"
+        },
+        "SignatureAlgorithm": {
+          "$ref": "#/definitions/Oid"
+        },
+        "SubjectName": {
+          "$ref": "#/definitions/X500DistinguishedName"
+        },
+        "Thumbprint": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "integer"
+        },
+        "Handle": {
+          "type": "object"
+        },
+        "Issuer": {
+          "type": "string"
+        },
+        "Subject": {
+          "type": "string"
         }
       }
     }
@@ -2212,8 +2080,14 @@
     "Eureka": {
       "$ref": "#/definitions/EurekaConfig"
     },
+    "Consul": {
+      "$ref": "#/definitions/ConsulConfig"
+    },
     "Logging": {
       "$ref": "#/definitions/LoggingRoot"
+    },
+    "CosmosDb": {
+      "$ref": "#/definitions/ConnectorConfig<CosmosDbConnectorOptions>"
     },
     "MySql": {
       "$ref": "#/definitions/ConnectorConfig<MySqlProviderConnectorOptions>"
