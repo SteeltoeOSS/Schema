@@ -40,6 +40,122 @@
         }
       }
     },
+    "BinderOptions": {
+      "type": "object",
+      "properties": {
+        "ConfigureClass": {
+          "type": "string"
+        },
+        "ConfigureAssembly": {
+          "type": "string"
+        },
+        "Environment": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "boolean",
+              "object",
+              "array"
+            ]
+          }
+        },
+        "InheritEnvironment": {
+          "type": "boolean"
+        },
+        "DefaultCandidate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "BindingOptions": {
+      "type": "object",
+      "properties": {
+        "Destination": {
+          "type": "string"
+        },
+        "Group": {
+          "type": "string"
+        },
+        "ContentType": {
+          "type": "string"
+        },
+        "Binder": {
+          "type": "string"
+        },
+        "Consumer": {
+          "$ref": "#/definitions/ConsumerOptions"
+        },
+        "Producer": {
+          "$ref": "#/definitions/ProducerOptions"
+        }
+      }
+    },
+    "BindingServiceOptions": {
+      "type": "object",
+      "properties": {
+        "InstanceIndex": {
+          "type": "integer"
+        },
+        "InstanceCount": {
+          "type": "integer"
+        },
+        "DefaultBinder": {
+          "type": "string"
+        },
+        "BindingRetryInterval": {
+          "type": "integer"
+        },
+        "OverrideCloudConnectors": {
+          "type": "boolean"
+        },
+        "DynamicDestinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Binders": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/BinderOptions"
+          }
+        },
+        "Bindings": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/BindingOptions"
+          }
+        },
+        "Default": {
+          "$ref": "#/definitions/BindingOptions"
+        }
+      }
+    },
+    "CacheOptions": {
+      "type": "object",
+      "properties": {
+        "Channel": {
+          "$ref": "#/definitions/ChannelOptions"
+        },
+        "Connection": {
+          "$ref": "#/definitions/ConnectionOptions"
+        }
+      }
+    },
+    "ChannelOptions": {
+      "type": "object",
+      "properties": {
+        "Size": {
+          "type": "integer"
+        },
+        "CheckoutTimeout": {
+          "type": "string"
+        }
+      }
+    },
     "Cloud": {
       "type": "object",
       "properties": {
@@ -48,6 +164,9 @@
         },
         "Kubernetes": {
           "$ref": "#/definitions/KubernetesConfig"
+        },
+        "Stream": {
+          "$ref": "#/definitions/BindingServiceOptions"
         }
       }
     },
@@ -191,6 +310,21 @@
         },
         "DisableTokenRenewal": {
           "type": "boolean"
+        }
+      }
+    },
+    "ConnectionOptions": {
+      "type": "object",
+      "properties": {
+        "Mode": {
+          "type": "string",
+          "enum": [
+            "CHANNEL",
+            "CONNECTION"
+          ]
+        },
+        "Size": {
+          "type": "integer"
         }
       }
     },
@@ -399,6 +533,9 @@
         },
         "CacheTTL": {
           "type": "integer"
+        },
+        "UseAspNetCoreUrls": {
+          "type": "boolean"
         }
       }
     },
@@ -442,6 +579,70 @@
         }
       }
     },
+    "ConsumerOptions": {
+      "type": "object",
+      "properties": {
+        "BindingName": {
+          "type": "string"
+        },
+        "AutoStartup": {
+          "type": "boolean"
+        },
+        "Concurrency": {
+          "type": "integer"
+        },
+        "Partitioned": {
+          "type": "boolean"
+        },
+        "InstanceCount": {
+          "type": "integer"
+        },
+        "InstanceIndex": {
+          "type": "integer"
+        },
+        "InstanceIndexList": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "MaxAttempts": {
+          "type": "integer"
+        },
+        "BackOffInitialInterval": {
+          "type": "integer"
+        },
+        "BackOffMaxInterval": {
+          "type": "integer"
+        },
+        "BackOffMultiplier": {
+          "type": "number"
+        },
+        "DefaultRetryable": {
+          "type": "boolean"
+        },
+        "RetryableExceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "HeaderMode": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Headers",
+            "EmbeddedHeaders"
+          ]
+        },
+        "UseNativeDecoding": {
+          "type": "boolean"
+        },
+        "Multiplex": {
+          "type": "boolean"
+        }
+      }
+    },
     "CosmosDbConnectorOptions": {
       "type": "object",
       "properties": {
@@ -464,6 +665,43 @@
           "type": "string"
         },
         "UseReadOnlyCredentials": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DirectContainerOptions": {
+      "type": "object",
+      "properties": {
+        "AutoStartup": {
+          "type": "boolean"
+        },
+        "AcknowledgeMode": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "MANUAL",
+            "AUTO"
+          ]
+        },
+        "Prefetch": {
+          "type": "integer"
+        },
+        "DefaultRequeueRejected": {
+          "type": "boolean"
+        },
+        "IdleEventInterval": {
+          "type": "string"
+        },
+        "Retry": {
+          "$ref": "#/definitions/ListenerRetryOptions"
+        },
+        "MissingQueuesFatal": {
+          "type": "boolean"
+        },
+        "ConsumersPerQueue": {
+          "type": "integer"
+        },
+        "PossibleAuthenticationFailureFatal": {
           "type": "boolean"
         }
       }
@@ -674,6 +912,12 @@
     "HeapDumpEndpointOptions": {
       "type": "object",
       "properties": {
+        "HeapDumpType": {
+          "type": "string"
+        },
+        "DefaultEnabled": {
+          "type": "boolean"
+        },
         "Enabled": {
           "type": "boolean"
         },
@@ -694,9 +938,6 @@
         },
         "Global": {
           "$ref": "#/definitions/IManagementOptions"
-        },
-        "DefaultEnabled": {
-          "type": "boolean"
         },
         "AllowedVerbs": {
           "type": "array",
@@ -1050,6 +1291,9 @@
           "items": {
             "$ref": "#/definitions/IEndpointOptions"
           }
+        },
+        "UseStatusCodeFromResponse": {
+          "type": "boolean"
         }
       }
     },
@@ -1119,9 +1363,6 @@
         "Enabled": {
           "type": "boolean"
         },
-        "Name": {
-          "type": "string"
-        },
         "ApplicationName": {
           "type": "string"
         },
@@ -1144,6 +1385,9 @@
           "type": "string"
         },
         "ApplicationId": {
+          "type": "string"
+        },
+        "Name": {
           "type": "string"
         },
         "ApplicationVersion": {
@@ -1243,6 +1487,43 @@
         }
       }
     },
+    "ListenerOptions": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "DIRECT"
+          ]
+        },
+        "Direct": {
+          "$ref": "#/definitions/DirectContainerOptions"
+        }
+      }
+    },
+    "ListenerRetryOptions": {
+      "type": "object",
+      "properties": {
+        "Stateless": {
+          "type": "boolean"
+        },
+        "Enabled": {
+          "type": "boolean"
+        },
+        "MaxAttempts": {
+          "type": "integer"
+        },
+        "InitialInterval": {
+          "type": "string"
+        },
+        "Multiplier": {
+          "type": "number"
+        },
+        "MaxInterval": {
+          "type": "string"
+        }
+      }
+    },
     "LoggersEndpointOptions": {
       "type": "object",
       "properties": {
@@ -1311,6 +1592,9 @@
       "properties": {
         "Endpoints": {
           "$ref": "#/definitions/Endpoints"
+        },
+        "Tracing": {
+          "$ref": "#/definitions/TracingOptions"
         }
       }
     },
@@ -1630,6 +1914,55 @@
         }
       }
     },
+    "ProducerOptions": {
+      "type": "object",
+      "properties": {
+        "BindingName": {
+          "type": "string"
+        },
+        "AutoStartup": {
+          "type": "boolean"
+        },
+        "PartitionKeyExpression": {
+          "type": "string"
+        },
+        "PartitionKeyExtractorName": {
+          "type": "string"
+        },
+        "PartitionSelectorName": {
+          "type": "string"
+        },
+        "PartitionSelectorExpression": {
+          "type": "string"
+        },
+        "PartitionCount": {
+          "type": "integer"
+        },
+        "RequiredGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "HeaderMode": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Headers",
+            "EmbeddedHeaders"
+          ]
+        },
+        "UseNativeEncoding": {
+          "type": "boolean"
+        },
+        "ErrorChannelEnabled": {
+          "type": "boolean"
+        },
+        "IsPartitioned": {
+          "type": "boolean"
+        }
+      }
+    },
     "PublicKey": {
       "type": "object",
       "additionalProperties": false,
@@ -1674,6 +2007,53 @@
         },
         "VirtualHost": {
           "type": "string"
+        }
+      }
+    },
+    "RabbitOptions": {
+      "type": "object",
+      "properties": {
+        "Host": {
+          "type": "string"
+        },
+        "Port": {
+          "type": "integer"
+        },
+        "Addresses": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "Ssl": {
+          "$ref": "#/definitions/SslOptions"
+        },
+        "VirtualHost": {
+          "type": "string"
+        },
+        "RequestedHeartbeat": {
+          "type": "string"
+        },
+        "PublisherConfirms": {
+          "type": "boolean"
+        },
+        "PublisherReturns": {
+          "type": "boolean"
+        },
+        "ConnectionTimeout": {
+          "type": "string"
+        },
+        "Cache": {
+          "$ref": "#/definitions/CacheOptions"
+        },
+        "Listener": {
+          "$ref": "#/definitions/ListenerOptions"
+        },
+        "Template": {
+          "$ref": "#/definitions/TemplateOptions"
         }
       }
     },
@@ -1798,6 +2178,26 @@
         }
       }
     },
+    "RetryOptions": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "MaxAttempts": {
+          "type": "integer"
+        },
+        "InitialInterval": {
+          "type": "string"
+        },
+        "Multiplier": {
+          "type": "number"
+        },
+        "MaxInterval": {
+          "type": "string"
+        }
+      }
+    },
     "Security": {
       "description": "Settings for Steeltoe Authentication Providers",
       "type": "object",
@@ -1816,6 +2216,9 @@
         },
         "Cloud": {
           "$ref": "#/definitions/Cloud"
+        },
+        "RabbitMQ": {
+          "$ref": "#/definitions/RabbitOptions"
         }
       }
     },
@@ -1869,6 +2272,58 @@
         },
         "Timeout": {
           "type": "integer"
+        }
+      }
+    },
+    "SslOptions": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "ValidateServerCertificate": {
+          "type": "boolean"
+        },
+        "VerifyHostname": {
+          "type": "boolean"
+        },
+        "CertPath": {
+          "type": "string"
+        },
+        "CertPassphrase": {
+          "type": "string"
+        },
+        "ServerHostName": {
+          "type": "string"
+        },
+        "Algorithm": {
+          "type": "integer"
+        }
+      }
+    },
+    "TemplateOptions": {
+      "type": "object",
+      "properties": {
+        "Retry": {
+          "$ref": "#/definitions/RetryOptions"
+        },
+        "Mandatory": {
+          "type": "boolean"
+        },
+        "ReceiveTimeout": {
+          "type": "string"
+        },
+        "ReplyTimeout": {
+          "type": "string"
+        },
+        "Exchange": {
+          "type": "string"
+        },
+        "RoutingKey": {
+          "type": "string"
+        },
+        "DefaultReceiveQueue": {
+          "type": "string"
         }
       }
     },
@@ -1978,6 +2433,45 @@
         },
         "ExactMatch": {
           "type": "boolean"
+        }
+      }
+    },
+    "TracingOptions": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "IngressIgnorePattern": {
+          "type": "string"
+        },
+        "EgressIgnorePattern": {
+          "type": "string"
+        },
+        "MaxPayloadSizeInBytes": {
+          "type": "integer"
+        },
+        "AlwaysSample": {
+          "type": "boolean"
+        },
+        "NeverSample": {
+          "type": "boolean"
+        },
+        "UseShortTraceIds": {
+          "type": "boolean"
+        },
+        "PropagationType": {
+          "type": "string"
+        },
+        "SingleB3Header": {
+          "type": "boolean"
+        },
+        "EnableGrpcAspNetCoreSupport": {
+          "type": "boolean"
+        },
+        "ExporterEndpoint": {
+          "type": "string",
+          "format": "uri"
         }
       }
     },
