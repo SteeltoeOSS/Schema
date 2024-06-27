@@ -1,10 +1,11 @@
-## Steeltoe appsettings.config schema generator
+## Steeltoe JSON Configuration Schema generator
 
-Generates the schema file that provides validation and IntelliSense when used in modern editors that support JSON Schema such Visual Studio 2019, Visual Studio Code and Rider.
-
-
+Generates the schema file that provides validation and IntelliSense when used in modern editors
+that support JSON Schema, such as Visual Studio 2022, Visual Studio Code and Rider.
 
 #### How to use
+
+Add the following line to your `appsettings.json` file:
 
 ```json
 {
@@ -12,4 +13,3 @@ Generates the schema file that provides validation and IntelliSense when used in
     ...
 }
 ```
-

@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schema", "Schema\Schema.csproj", "{FD969F2D-D3C6-46A0-B854-BC1F8DEA2729}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationSchemaGenerator", "ConfigurationSchemaGenerator\ConfigurationSchemaGenerator.csproj", "{E56232A2-4A62-41A4-8B8D-C44E24787194}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationSchemaGeneratorTest", "ConfigurationSchemaGeneratorTest\ConfigurationSchemaGeneratorTest.csproj", "{8FB42B47-D6D5-444F-B741-D7766A249289}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationSchemaGeneratorTest", "ConfigurationSchemaGeneratorTest\ConfigurationSchemaGeneratorTest.csproj", "{8FB42B47-D6D5-444F-B741-D7766A249289}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FD969F2D-D3C6-46A0-B854-BC1F8DEA2729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD969F2D-D3C6-46A0-B854-BC1F8DEA2729}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD969F2D-D3C6-46A0-B854-BC1F8DEA2729}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD969F2D-D3C6-46A0-B854-BC1F8DEA2729}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E56232A2-4A62-41A4-8B8D-C44E24787194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E56232A2-4A62-41A4-8B8D-C44E24787194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E56232A2-4A62-41A4-8B8D-C44E24787194}.Release|Any CPU.ActiveCfg = Release|Any CPU
