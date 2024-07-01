@@ -26,7 +26,7 @@ public sealed class IntegrationTest
         entryPoint.Invoke(null, [args]);
 
         string outputJson = File.ReadAllText(outputPath);
-        string expectedJson = File.ReadAllText(Path.Combine(outputDirectory, "merge-expected.json"));
+        string expectedJson = File.ReadAllText(Path.Combine(outputDirectory, "merge-expected.json")).ReplaceLineEndings();
 
         outputJson.Should().Be(expectedJson);
     }
