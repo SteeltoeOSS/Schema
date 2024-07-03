@@ -19,6 +19,14 @@
     "Management": {
       "type": "object",
       "properties": {
+        "CloudFoundry": {
+          "type": "object",
+          "properties": {
+            "Enabled": {
+              "type": "boolean"
+            }
+          }
+        },
         "Endpoints": {
           "type": "object",
           "properties": {
@@ -33,6 +41,23 @@
                 },
                 "Enabled": {
                   "type": "boolean"
+                },
+                "Exposure": {
+                  "type": "object",
+                  "properties": {
+                    "Exclude": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "Include": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 },
                 "Id": {
                   "type": "string"
@@ -651,8 +676,94 @@
                 }
               }
             },
+            "SslEnabled": {
+              "type": "boolean"
+            },
+            "Trace": {
+              "type": "object",
+              "properties": {
+                "AddAuthType": {
+                  "type": "boolean"
+                },
+                "AddParameters": {
+                  "type": "boolean"
+                },
+                "AddPathInfo": {
+                  "type": "boolean"
+                },
+                "AddQueryString": {
+                  "type": "boolean"
+                },
+                "AddRemoteAddress": {
+                  "type": "boolean"
+                },
+                "AddRequestHeaders": {
+                  "type": "boolean"
+                },
+                "AddResponseHeaders": {
+                  "type": "boolean"
+                },
+                "AddSessionId": {
+                  "type": "boolean"
+                },
+                "AddTimeTaken": {
+                  "type": "boolean"
+                },
+                "AddUserPrincipal": {
+                  "type": "boolean"
+                },
+                "AllowedVerbs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "Capacity": {
+                  "type": "integer"
+                },
+                "Enabled": {
+                  "type": "boolean"
+                },
+                "Id": {
+                  "type": "string"
+                },
+                "Path": {
+                  "type": "string"
+                },
+                "RequiredPermissions": {
+                  "enum": [
+                    "Undefined",
+                    "None",
+                    "Restricted",
+                    "Full"
+                  ]
+                }
+              }
+            },
             "UseStatusCodeFromResponse": {
               "type": "boolean"
+            },
+            "Web": {
+              "type": "object",
+              "properties": {
+                "Exposure": {
+                  "type": "object",
+                  "properties": {
+                    "Exclude": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "Include": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
@@ -714,6 +825,14 @@
     "Spring": {
       "type": "object",
       "properties": {
+        "Application": {
+          "type": "object",
+          "properties": {
+            "Name": {
+              "type": "string"
+            }
+          }
+        },
         "Boot": {
           "type": "object",
           "properties": {

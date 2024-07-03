@@ -16,6 +16,25 @@
   },
   "type": "object",
   "properties": {
+    "Certificates": {
+      "type": "object",
+      "properties": {
+        "Eureka": {
+          "type": "object",
+          "properties": {
+            "CertificateFilePath": {
+              "type": "string",
+              "description": "Gets or sets the local path to a certificate file on disk. Use 'Steeltoe.Common.Certificates.CertificateSettings.PrivateKeyFilePath' if the private key is stored in another file."
+            },
+            "PrivateKeyFilePath": {
+              "type": "string",
+              "description": "Gets or sets the local path to a private key file on disk (optional)."
+            }
+          },
+          "description": "Indicates where to load a 'System.Security.Cryptography.X509Certificates.X509Certificate2' from."
+        }
+      }
+    },
     "Eureka": {
       "type": "object",
       "properties": {
@@ -246,6 +265,65 @@
             "VipAddress": {
               "type": "string",
               "description": "Gets or sets the comma-delimited list of VIP (Virtual Internet Protocol) addresses for the instance."
+            }
+          }
+        }
+      }
+    },
+    "Spring": {
+      "type": "object",
+      "properties": {
+        "Application": {
+          "type": "object",
+          "properties": {
+            "Name": {
+              "type": "string"
+            }
+          }
+        },
+        "Cloud": {
+          "type": "object",
+          "properties": {
+            "Discovery": {
+              "type": "object",
+              "properties": {
+                "Enabled": {
+                  "type": "boolean"
+                },
+                "RegistrationMethod": {
+                  "type": "string"
+                }
+              }
+            },
+            "Inet": {
+              "type": "object",
+              "properties": {
+                "DefaultHostname": {
+                  "type": "string",
+                  "description": "Gets or sets the default hostname. Default value: localhost."
+                },
+                "DefaultIPAddress": {
+                  "type": "string",
+                  "description": "Gets or sets the default IP address. Default value: 127.0.0.1."
+                },
+                "IgnoredInterfaces": {
+                  "type": "string",
+                  "description": "Gets or sets a comma-delimited list of network interfaces to ignore."
+                },
+                "PreferredNetworks": {
+                  "type": "string",
+                  "description": "Gets or sets a comma-delimited list of preferred networks."
+                },
+                "SkipReverseDnsLookup": {
+                  "type": "boolean",
+                  "description": "Gets or sets a value indicating whether to skip reverse DNS lookups."
+                },
+                "UseOnlySiteLocalInterfaces": {
+                  "type": "boolean",
+                  "description": "Gets or sets a value indicating whether to use only site-local network interfaces."
+                }
+              },
+              "description": "Provides settings for resolving network interfaces."
             }
           }
         }
