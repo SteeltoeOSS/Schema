@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ConfigurationSchemaGenerator": {
+      "commandName": "Project",
+      //"commandLineArgs": "../../../merge-actual.json ../../../../../Steeltoe"
+    }
+  }
+}
