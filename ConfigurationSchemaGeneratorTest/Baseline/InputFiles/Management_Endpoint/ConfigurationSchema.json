@@ -165,42 +165,6 @@
                 }
               }
             },
-            "Dump": {
-              "type": "object",
-              "properties": {
-                "AllowedVerbs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Gets the list of HTTP verbs that are allowed for this endpoint."
-                },
-                "Duration": {
-                  "type": "integer",
-                  "description": "Gets or sets the duration (in milliseconds) before signaling to stop the capture. Default value: 10."
-                },
-                "Enabled": {
-                  "type": "boolean",
-                  "description": "Gets or sets a value indicating whether this endpoint is enabled."
-                },
-                "Id": {
-                  "type": "string",
-                  "description": "Gets or sets the unique ID of this endpoint."
-                },
-                "Path": {
-                  "type": "string",
-                  "description": "Gets or sets the relative path at which this endpoint is exposed."
-                },
-                "RequiredPermissions": {
-                  "enum": [
-                    "None",
-                    "Restricted",
-                    "Full"
-                  ],
-                  "description": "Gets or sets the permissions required to access this endpoint, when running on Cloud Foundry. Default value: Restricted."
-                }
-              }
-            },
             "Enabled": {
               "type": "boolean",
               "description": "Gets or sets a value indicating whether management endpoints are enabled. Default value: true."
@@ -263,7 +227,8 @@
                     "Value": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "description": "Gets or sets the claim requirements for retrieving components and/or details."
                 },
                 "DiskSpace": {
                   "type": "object",
@@ -293,10 +258,27 @@
                     "properties": {
                       "Include": {
                         "type": "string",
-                        "description": "Gets or sets a comma-separated list of contributors or tags to include in this group."
+                        "description": "Gets or sets a comma-separated list of health contributor IDs and/or health check registration names to include in this group."
+                      },
+                      "ShowComponents": {
+                        "enum": [
+                          "Never",
+                          "WhenAuthorized",
+                          "Always"
+                        ],
+                        "description": "Gets or sets when to show components in this group, overriding the endpoint-level setting."
+                      },
+                      "ShowDetails": {
+                        "enum": [
+                          "Never",
+                          "WhenAuthorized",
+                          "Always"
+                        ],
+                        "description": "Gets or sets when to show details of components in this group, overriding the endpoint-level setting."
                       }
                     }
-                  }
+                  },
+                  "description": "Gets the configured health groups."
                 },
                 "Id": {
                   "type": "string",
@@ -307,7 +289,7 @@
                   "properties": {
                     "Enabled": {
                       "type": "boolean",
-                      "description": "Gets or sets a value indicating whether to enable the liveness contributor. Default value: true."
+                      "description": "Gets or sets a value indicating whether to enable the liveness contributor. Default value: false."
                     }
                   }
                 },
@@ -315,12 +297,21 @@
                   "type": "string",
                   "description": "Gets or sets the relative path at which this endpoint is exposed."
                 },
+                "Ping": {
+                  "type": "object",
+                  "properties": {
+                    "Enabled": {
+                      "type": "boolean",
+                      "description": "Gets or sets a value indicating whether to enable the ping contributor. Default value: true."
+                    }
+                  }
+                },
                 "Readiness": {
                   "type": "object",
                   "properties": {
                     "Enabled": {
                       "type": "boolean",
-                      "description": "Gets or sets a value indicating whether to enable the readiness contributor. Default value: true."
+                      "description": "Gets or sets a value indicating whether to enable the readiness contributor. Default value: false."
                     }
                   }
                 },
@@ -333,15 +324,24 @@
                   "description": "Gets or sets the permissions required to access this endpoint, when running on Cloud Foundry. Default value: Restricted."
                 },
                 "Role": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Gets or sets the role required to retrieve components and/or details."
+                },
+                "ShowComponents": {
+                  "enum": [
+                    "Never",
+                    "WhenAuthorized",
+                    "Always"
+                  ],
+                  "description": "Gets or sets when to show components in responses."
                 },
                 "ShowDetails": {
                   "enum": [
-                    "Always",
                     "Never",
-                    "WhenAuthorized"
+                    "WhenAuthorized",
+                    "Always"
                   ],
-                  "description": "Represents the level of detail to include in the health endpoint response."
+                  "description": "Gets or sets when to show details of components in responses."
                 }
               }
             },
@@ -549,56 +549,9 @@
                   "type": "string",
                   "description": "Gets or sets the unique ID of this endpoint."
                 },
-                "Path": {
-                  "type": "string",
-                  "description": "Gets or sets the relative path at which this endpoint is exposed."
-                },
-                "RequiredPermissions": {
-                  "enum": [
-                    "None",
-                    "Restricted",
-                    "Full"
-                  ],
-                  "description": "Gets or sets the permissions required to access this endpoint, when running on Cloud Foundry. Default value: Restricted."
-                }
-              }
-            },
-            "Metrics": {
-              "type": "object",
-              "properties": {
-                "AllowedVerbs": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Gets the list of HTTP verbs that are allowed for this endpoint."
-                },
-                "CacheDurationMilliseconds": {
-                  "type": "integer",
-                  "description": "Gets or sets the duration (in milliseconds) that metrics are cached for. Default value: 500."
-                },
-                "Enabled": {
+                "IncludeActuators": {
                   "type": "boolean",
-                  "description": "Gets or sets a value indicating whether this endpoint is enabled."
-                },
-                "Id": {
-                  "type": "string",
-                  "description": "Gets or sets the unique ID of this endpoint."
-                },
-                "IncludedMetrics": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Gets the names of additional metrics to include. See the list at https://learn.microsoft.com/dotnet/core/diagnostics/available-counters#systemruntime-counters."
-                },
-                "MaxHistograms": {
-                  "type": "integer",
-                  "description": "Gets or sets the maximum number of histograms to return. Default value: 100."
-                },
-                "MaxTimeSeries": {
-                  "type": "integer",
-                  "description": "Gets or sets the maximum number of time series to return. Default value: 100."
+                  "description": "Gets or sets a value indicating whether to include actuator endpoints in the route mappings response. Default value: true."
                 },
                 "Path": {
                   "type": "string",
@@ -661,6 +614,10 @@
             "SerializerOptions": {
               "type": "object",
               "properties": {
+                "AllowOutOfOrderMetadataProperties": {
+                  "type": "boolean",
+                  "description": "Allows JSON metadata properties to be specified after regular properties in a deserialized JSON object."
+                },
                 "AllowTrailingCommas": {
                   "type": "boolean",
                   "description": "Get or sets a value that indicates whether an extra comma at the end of a list of JSON values in an object or array is allowed (and ignored) within the JSON payload being deserialized."
@@ -684,15 +641,27 @@
                 },
                 "IgnoreReadOnlyProperties": {
                   "type": "boolean",
-                  "description": "Gets a value that indicates whether read-only properties are ignored during serialization. The default value is false."
+                  "description": "Gets or sets a value that indicates whether read-only properties are ignored during serialization. The default value is false."
                 },
                 "IncludeFields": {
                   "type": "boolean",
                   "description": "Gets or sets a value that indicates whether fields are handled during serialization and deserialization. The default value is false."
                 },
+                "IndentCharacter": {
+                  "type": "integer",
+                  "description": "Defines the indentation character being used when 'System.Text.Json.JsonSerializerOptions.WriteIndented' is enabled. Defaults to the space character."
+                },
+                "IndentSize": {
+                  "type": "integer",
+                  "description": "Defines the indentation size being used when 'System.Text.Json.JsonSerializerOptions.WriteIndented' is enabled. Defaults to two."
+                },
                 "MaxDepth": {
                   "type": "integer",
                   "description": "Gets or sets the maximum depth allowed when serializing or deserializing JSON, with the default value of 0 indicating a maximum depth of 64."
+                },
+                "NewLine": {
+                  "type": "string",
+                  "description": "Gets or sets the new line string to use when 'System.Text.Json.JsonSerializerOptions.WriteIndented' is true.\n\nThe default is the value of 'System.Environment.NewLine'."
                 },
                 "NumberHandling": {
                   "enum": [
@@ -721,6 +690,14 @@
                     "Allow"
                   ],
                   "description": "Gets or sets a value that defines how comments are handled during deserialization."
+                },
+                "RespectNullableAnnotations": {
+                  "type": "boolean",
+                  "description": "Gets or sets a value that indicates whether nullability annotations should be respected during serialization and deserialization."
+                },
+                "RespectRequiredConstructorParameters": {
+                  "type": "boolean",
+                  "description": "Gets or sets a value that indicates whether non-optional constructor parameters should be specified during deserialization."
                 },
                 "UnknownTypeHandling": {
                   "enum": [
@@ -779,6 +756,42 @@
               "type": "boolean",
               "description": "Gets or sets a value indicating whether 'Steeltoe.Management.Endpoint.Configuration.ManagementOptions.Port' applies to HTTP or HTTPS requests. Default value: false."
             },
+            "ThreadDump": {
+              "type": "object",
+              "properties": {
+                "AllowedVerbs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Gets the list of HTTP verbs that are allowed for this endpoint."
+                },
+                "Duration": {
+                  "type": "integer",
+                  "description": "Gets or sets the duration (in milliseconds) before signaling to stop the capture. Default value: 10."
+                },
+                "Enabled": {
+                  "type": "boolean",
+                  "description": "Gets or sets a value indicating whether this endpoint is enabled."
+                },
+                "Id": {
+                  "type": "string",
+                  "description": "Gets or sets the unique ID of this endpoint."
+                },
+                "Path": {
+                  "type": "string",
+                  "description": "Gets or sets the relative path at which this endpoint is exposed."
+                },
+                "RequiredPermissions": {
+                  "enum": [
+                    "None",
+                    "Restricted",
+                    "Full"
+                  ],
+                  "description": "Gets or sets the permissions required to access this endpoint, when running on Cloud Foundry. Default value: Restricted."
+                }
+              }
+            },
             "UseStatusCodeFromResponse": {
               "type": "boolean",
               "description": "Gets or sets a value indicating whether the HTTP response status code is based on the health status. This setting can be overruled by sending an X-Use-Status-Code-From-Response HTTP header. Default value: true."
@@ -810,66 +823,6 @@
             }
           },
           "description": "Provides configuration settings for management endpoints (actuators)."
-        },
-        "Metrics": {
-          "type": "object",
-          "properties": {
-            "Observer": {
-              "type": "object",
-              "properties": {
-                "AspNetCoreHosting": {
-                  "type": "boolean",
-                  "description": "Gets or sets a value indicating whether to enable the Steeltoe ASP.NET Core hosting observer (HTTP server metrics). Default value: true."
-                },
-                "EgressIgnorePattern": {
-                  "type": "string",
-                  "description": "Gets or sets a regex pattern for requests leaving this application where metrics should not be captured."
-                },
-                "EventCounterEvents": {
-                  "type": "boolean",
-                  "description": "Gets or sets a value indicating whether to enable metrics for EventCounter events. Default value: false."
-                },
-                "EventCounterIntervalSec": {
-                  "type": "integer",
-                  "description": "Gets or sets how often to export (in seconds) when 'Steeltoe.Management.Diagnostics.MetricsObserverOptions.EventCounterEvents' is set to true. Default value: 1."
-                },
-                "ExcludedMetrics": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Gets a list of metrics that should not be captured. Entries in 'Steeltoe.Management.Diagnostics.MetricsObserverOptions.IncludedMetrics' take precedence in case of conflict."
-                },
-                "GCEvents": {
-                  "type": "boolean",
-                  "description": "Gets or sets a value indicating whether to enable metrics for CLR garbage collection. Default value: true."
-                },
-                "HttpClientCore": {
-                  "type": "boolean",
-                  "description": "Gets or sets a value indicating whether to enable the Steeltoe HttpClient observer for ASP.NET Core. Default value: false."
-                },
-                "HttpClientDesktop": {
-                  "type": "boolean",
-                  "description": "Gets or sets a value indicating whether to enable the Steeltoe HttpClient observer for desktop apps. Default value: false."
-                },
-                "IncludedMetrics": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "Gets a list of metrics that should be captured. This takes precedence over 'Steeltoe.Management.Diagnostics.MetricsObserverOptions.ExcludedMetrics' in case of conflict."
-                },
-                "IngressIgnorePattern": {
-                  "type": "string",
-                  "description": "Gets or sets a regex pattern for requests coming into this application where metrics should not be captured."
-                },
-                "ThreadPoolEvents": {
-                  "type": "boolean",
-                  "description": "Gets or sets a value indicating whether to enable metrics for CLR thread pool events. Default value: true."
-                }
-              }
-            }
-          }
         }
       }
     },
