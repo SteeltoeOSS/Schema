@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <CoverletCollectorVersion>6.0.*</CoverletCollectorVersion>
+    <FluentAssertionsVersion>7.2.*</FluentAssertionsVersion>
+    <GitHubActionsTestLoggerVersion>2.4.*</GitHubActionsTestLoggerVersion>
+    <MicrosoftNetTestSdkVersion>17.13.*</MicrosoftNetTestSdkVersion>
+    <XunitVersion>2.*</XunitVersion>
+  </PropertyGroup>
+</Project>

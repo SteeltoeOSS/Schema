@@ -1,0 +1,50 @@
+name: build-and-test
+on:
+  pull_request:
+    branches:
+    - main
+  push:
+    branches:
+    - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build-and-test:
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          8.0.*
+    - name: Git checkout Schema
+      uses: actions/checkout@v4
+      with:
+        path: Schema
+    - name: Git checkout Steeltoe
+      uses: actions/checkout@v2
+      with:
+        repository: SteeltoeOSS/Steeltoe
+        path: Steeltoe
+        ref: main
+    - name: Restore packages
+      run: |
+        dotnet restore Schema
+    - name: Build
+      run: |
+        dotnet build Schema --no-restore --configuration Release
+    - name: Test
+      run: |
+        dotnet test Schema --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "GitHubActions;summary.includeSkippedTests=true"
