@@ -43,6 +43,31 @@ internal sealed class JsonSchemaMerger
         MergeSchema(sourceSchema, _root);
     }
 
+    public void RemoveLogLevels()
+    {
+        // Workaround for Visual Studio displaying the following warning when the schema is downloaded from a URL:
+        //   There are problems with this document's schema impacting one or more items in the document. Please report this issue to schema owner.
+        // With the following text in the Output Window:
+        //   Reference could not be resolved
+        //   at (line 6, column 19) in document https://steeltoe.io/schema/v4/schema.json
+        //   at schema text "#/definitions/logLevelThreshold"
+        // When the schema is embedded in a NuGet package, Visual Studio merges it with its own definition for "logLevelThreshold",
+        // but that doesn't happen when the schema is downloaded from a URL.
+
+        if (_root.ExtensionData.TryGetValue("definitions", out JToken? definitionsToken) && definitionsToken is JObject definitionsObject)
+        {
+            if (definitionsObject.TryGetValue("logLevel", out JToken? logLevelToken))
+            {
+                logLevelToken.Parent!.Remove();
+            }
+
+            if (definitionsObject.Count == 0)
+            {
+                _root.ExtensionData.Remove("definitions");
+            }
+        }
+    }
+
     public string? GetResult()
     {
         return Sorter.Sort(_root);
