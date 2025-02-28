@@ -25,6 +25,7 @@ else
         merger.AddSourceFile(path);
     }
 
+    merger.RemoveLogLevels();
     string? json = merger.GetResult();
 
     Console.WriteLine($"Writing results to file: {Path.GetFullPath(outputPath)}");
