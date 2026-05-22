@@ -23,16 +23,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: |
           8.0.*
     - name: Git checkout Schema
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         path: Schema
     - name: Git checkout Steeltoe
-      uses: actions/checkout@v2
+      uses: actions/checkout@v6
       with:
         repository: SteeltoeOSS/Steeltoe
         path: Steeltoe
