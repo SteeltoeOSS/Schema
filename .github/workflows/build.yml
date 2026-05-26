@@ -26,23 +26,25 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: |
-          8.0.*
+          10.0.*
     - name: Git checkout Schema
       uses: actions/checkout@v6
       with:
         path: Schema
+        persist-credentials: false
     - name: Git checkout Steeltoe
       uses: actions/checkout@v6
       with:
         repository: SteeltoeOSS/Steeltoe
         path: Steeltoe
         ref: main
+        persist-credentials: false
     - name: Restore packages
       run: |
         dotnet restore Schema
-    - name: Build
+    - name: Build solution
       run: |
         dotnet build Schema --no-restore --configuration Release
     - name: Test
       run: |
-        dotnet test Schema --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "GitHubActions;summary.includeSkippedTests=true"
+        dotnet test Schema --no-build --configuration Release
